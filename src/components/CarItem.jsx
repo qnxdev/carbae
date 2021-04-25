@@ -4,7 +4,7 @@ export const CarItem = ({ car }) => {
     (car.fuel_types === "both" ? 2 : 1);
 
   return (
-    <div key={car.id} className="listItem">
+    <div  className="listItem">
       <img src={car.main_image} alt="Not available" />
       <div className="carDetail">
         <p>{car.name}</p>
