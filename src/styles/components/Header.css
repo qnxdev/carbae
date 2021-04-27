@@ -1,0 +1,42 @@
+.header,
+.logo,
+.access {
+  display: flex;
+}
+
+.header {
+  background-color: #fff;
+  justify-content: space-between;
+  height: 50px;
+  width: 100vw;
+  max-width: 100vw;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.logo,
+.access {
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 200 !important;
+}
+
+.logo img {
+  width: 50px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+.access{
+  margin-right: 30px;
+}
+
+.access img {
+  width: 25px;
+  height: 25px;
+  margin:0 10px 0 10px;
+}
