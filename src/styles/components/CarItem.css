@@ -1,0 +1,25 @@
+.listItem{
+    display: flex;
+    align-items: center;
+    padding: 5px 13px;
+}
+
+.listItem img{
+    width: 150px;
+    border-radius: 7px;
+}
+
+.listItem h4, .listItem p{
+    margin: 5px;
+}
+
+.listItem p:nth-child(3){
+    color: #999;
+}
+
+.carDetail{
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
