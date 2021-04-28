@@ -1,14 +1,17 @@
 import { ORG_LOGO, ORG_NAME } from "../lib/constants";
+import "../styles/components/Header.css";
 
 export default () => {
-  return <div className="header">
+  return (
+    <header className="header">
       <div className="logo">
-          <img src={ORG_LOGO} alt="" width="50px"/>
-          <h2>{ORG_NAME}</h2>
+        <img src={ORG_LOGO} alt="" />
+        <h2>{ORG_NAME}</h2>
       </div>
       <div className="access">
-          <img src='/location.png' alt="" width="50px"/>
-          <img src='/search.png' alt="" width="50px"/>
+        <img onClick={()=>alert("Location Access")} src="/icons/location.png" alt="" />
+        <img onClick={()=>alert("Search")} src="/icons/search.png" alt="" />
       </div>
-  </div>;
+    </header>
+  );
 };

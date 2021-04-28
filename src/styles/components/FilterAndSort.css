@@ -1,0 +1,39 @@
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 90;
+  bottom: 10px;
+  width: 100%;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.button img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.filter {
+}
+
+.optionOverlay {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  position: fixed;
+  top: 0;
+  background-color: #fff;
+}

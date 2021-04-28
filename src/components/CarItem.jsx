@@ -1,10 +1,12 @@
+import "../styles/components/CarItem.css";
+
 export const CarItem = ({ car }) => {
   const varientCount =
     (car.transmission_types === "both" ? 2 : 0) +
     (car.fuel_types === "both" ? 2 : 1);
 
   return (
-    <div  className="listItem">
+    <div className="listItem">
       <img src={car.main_image} alt="Not available" />
       <div className="carDetail">
         <p>{car.name}</p>
