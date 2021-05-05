@@ -79,7 +79,7 @@ export default function FilterSort({ userPref, setUserPref }) {
                   type="bodyType"
                   value="hatchback"
                 >
-                  <h1>&#8377;</h1>
+                  <img src="/icons/hatchback.png" alt=""/>
                   <p>Hatchback</p>
                 </Option>
                 <Option
@@ -88,7 +88,7 @@ export default function FilterSort({ userPref, setUserPref }) {
                   type="bodyType"
                   value="sedan"
                 >
-                  <h1>&#8377;&#8377;</h1>
+                  <img src="/icons/sedan.png" alt=""/>
                   <p>Sedan</p>
                 </Option>
                 <Option
@@ -97,7 +97,7 @@ export default function FilterSort({ userPref, setUserPref }) {
                   type="bodyType"
                   value="suv"
                 >
-                  <h1>&#8377;&#8377;&#8377;</h1>
+                  <img src="/icons/suv.png" alt=""/>
                   <p>SUV</p>
                 </Option>
               </ExpandView>

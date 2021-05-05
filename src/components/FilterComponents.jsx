@@ -43,9 +43,13 @@ export const Option = ({
         ? {
             borderColor: ORG_THEME_COLOUR_1,
             backgroundColor: "#fcf2f4",
-            height: type=="transmission" ? "100%":"80px"
+            height: type == "transmission" ? "100%" : "80px",
           }
-        : { borderColor: "#eee", backgroundColor: "#fff" }
+        : {
+            borderColor: "#eee",
+            backgroundColor: "#fff",
+            height: type == "transmission" ? "100%" : "80px",
+          }
     }
   >
     {children}
