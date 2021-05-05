@@ -13,12 +13,15 @@ function Listing({ cars, setCars }) {
 
   const [userPref, setUserPref] = useState({
     filter: {
-      budget: budget != "" ? budget.split("_") : [],
-      bodyType: bodyType != "" ? bodyType.split("_") : [],
-      transmission: transmission != "" ? transmission.split("_") : [],
+      budget: budget !== "" ? budget.split("_") : [],
+      bodyType: bodyType !== "" ? bodyType.split("_") : [],
+      transmission: transmission !== "" ? transmission.split("_") : [],
     },
     sort: "",
   });
+  const [budgetResObj, setBudgetResObj] = useState([]);
+  const [transResObj, setTransResObj] = useState([]);
+  const [bodyResObj, setBodyResObj] = useState([]);
   const [resObj, setResObj] = useState([]);
 
   const GetCars = async () => {
@@ -29,27 +32,98 @@ function Listing({ cars, setCars }) {
   };
 
   useEffect(() => {
-    const results = cars.filter(function (car) {
-      if (
-        (userPref.filter.transmission.length == 0 || //No transmission selected
-          userPref.filter.transmission.includes(car.transmission_types)) && //selected transmission included
-        (userPref.filter.bodyType.length == 0 ||
-          userPref.filter.bodyType.includes(car.body_type)) &&
-        (userPref.filter.budget.length == 0 ||
-          (userPref.filter.budget.includes("0l") &&
-            car.price_starts <= 1000000)) &&
-        (userPref.filter.budget.length == 0 ||
-          (userPref.filter.budget.includes("10l") &&
-            car.price_starts > 1000000 &&
-            car.price_starts <= 2500000)) &&
-        (userPref.filter.budget.length == 0 ||
-          (userPref.filter.budget.includes("25l") &&
-            car.price_starts > 2500000))
-      ) {
-        return car;
+    let res = [];
+    for (let i = 0; i < cars.length; i++) {
+      let flag = 0;
+      if (userPref.filter.budget.length === 0) {
+        res.push(cars[i]);
+      } else {
+        if (
+          userPref.filter.budget.includes("0l") &&
+          cars[i].price_starts < 1000000
+        ) {
+          res.push(cars[i]);
+          flag = 1;
+        }
+        if (
+          flag != 1 &&
+          userPref.filter.budget.includes("10l") &&
+          cars[i].price_starts >= 1000000 &&
+          cars[i].price_starts < 2500000
+        ) {
+          res.push(cars[i]);
+          flag = 1;
+        }
+        if (
+          flag != 1 &&
+          userPref.filter.budget.includes("25l") &&
+          cars[i].price_starts > 2500000
+        ) {
+          res.push(cars[i]);
+          flag = 1;
+        }
       }
-    });
-    setResObj(results);
+    }
+    setBudgetResObj(res);
+  }, [userPref.filter.budget, cars]);
+
+  useEffect(() => {
+    let res = [];
+    for (let i = 0; i < cars.length; i++) {
+      if (userPref.filter.bodyType.length === 0) {
+        res.push(cars[i]);
+      } else {
+        if (userPref.filter.bodyType.includes(cars[i].body_type)) {
+          res.push(cars[i]);
+        }
+      }
+    }
+    setBodyResObj(res);
+  }, [userPref.filter.bodyType, cars]);
+
+  useEffect(() => {
+    let res = [];
+    for (let i = 0; i < cars.length; i++) {
+      if (userPref.filter.transmission.length === 0) {
+        res.push(cars[i]);
+      } else {
+        if (
+          userPref.filter.transmission.includes(cars[i].transmission_types) ||
+          cars[i].transmission_types === "both"
+        ) {
+          res.push(cars[i]);
+        }
+      }
+    }
+    setTransResObj(res);
+  }, [userPref.filter.transmission, cars]);
+
+  useEffect(() => {
+    let res = [];
+    let i = 0;
+    while (i < cars.length) {
+      if (
+        budgetResObj.includes(cars[i]) &&
+        bodyResObj.includes(cars[i]) &&
+        transResObj.includes(cars[i])
+      ) {
+        res.push(cars[i]);
+      }
+      i++;
+    }
+    setResObj(res);
+  }, [budgetResObj, bodyResObj, transResObj]);
+
+  useEffect(() => {
+    if (userPref.filter.budget !== budget.split("_")) {
+      setBudget(userPref.filter.budget.join("_"));
+    }
+    if (userPref.filter.bodyType !== bodyType.split("_")) {
+      setBodyType(userPref.filter.bodyType.join("_"));
+    }
+    if (userPref.filter.transmission !== transmission.split("_")) {
+      setTransmission(userPref.filter.transmission.join("_"));
+    }
   }, [userPref]);
 
   useEffect(() => {
@@ -63,18 +137,18 @@ function Listing({ cars, setCars }) {
   } else {
     return (
       <div className="listing">
-        {cars.length !== 0 && resObj.length == 0 && (
+        {cars.length !== 0 && resObj.length === 0 && (
           <Message message={"None available. Please change filter options."} />
         )}
 
         {resObj.map((car) => (
           <CarItem car={car} key={car.id} />
         ))}
-        <FilterSort />
+        <FilterSort userPref={userPref} setUserPref={setUserPref} />
         <style>{`
             .listing{
               margin-top: 70px;
-              margin-bottom: 20px;
+              margin-bottom: 50px;
             }
         `}</style>
       </div>

@@ -1,13 +1,18 @@
-import './App.css';
-import Header from './components/Header';
-import Listing from './components/Listing';
+import { HashRouter as Router, Route } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import Listing from "./components/Listing";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Listing/>
-    </div>
+    <Router>
+      <Route path="/">
+        <div className="App">
+          <Header />
+          <Listing />
+        </div>
+      </Route>
+    </Router>
   );
 }
 
